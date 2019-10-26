@@ -7,9 +7,7 @@ accompanying documents (".doc" and ".pptx") to guide the user in adding these fi
 with these procedures. 
 
 
-These analysis files were written on the premise that the FSCV protocols are -0.4V --> 1V --> -0.4V at a 400 V/s scan rate and the signal 
-being digitized at 100kHz. If any of these parameters are changed during data acquisition, then the following line of code must be altered 
-in the FSCVcal_Aug19.ipf and FSCVstim_Aug19_b.ipf under the function name: 
+These analysis files were written on the premise that the FSCV protocols are -0.4V --> 1V --> -0.4V at a 400 V/s scan rate, execucted at 10Hz and the signal being digitized at 100kHz. If any of these parameters are changed during data acquisition, then the following line of code must be altered in the FSCVcal_Aug19.ipf and FSCVstim_Aug19_b.ipf under the function name: 
 
 "static function CalcOx(oxidation): ButtonControl"
 
