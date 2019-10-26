@@ -14,9 +14,8 @@ Quick Notes
 
   tc[i]=mean($theWaveName, pnt2x($theWaveName,213), pnt2x($theWaveName,264))
 
-This line calculates the mean current recorded between 450-650mV of the command voltage. If the recording parameters change (increase
-stimulus range, scan rate or digitization rate) then the values 213&264 must be adjusted so the new values reflect the 450-650mV points on 
-the current waves recorded with the new recording parameter. 
+This line calculates the mean current recorded between 450-650mV from the command voltage. If the recording parameters change (increase
+stimulus range, scan rate or digitization rate) then the values 213 &2 64 must be adjusted so the new values reflect the 450-650mV points on the current waves recorded with the new recording parameter. 
 
 3. Because of patchmaster's software limitations, patchmaster had to be programmed to stimulate a command voltage twice in 1 sweep at 93ms apart so the command voltage could be sent at 10Hz in real time. To be able to analyze every pulse individually, the "redimension" command in the procedure files readjusts the current sweep so that the first pulse is labelled as an odd number wave while the second pulse is labelled as an even numbered wave. The command includes for numerical sequential ordering of the wave names for consecutive analysis functions. 
 
