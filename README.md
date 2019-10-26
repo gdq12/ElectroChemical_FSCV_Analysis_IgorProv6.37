@@ -8,9 +8,12 @@ Quick Notes
 
 1. These procedure files were written in IGOR pro v6.37 environment. Should they be used in any other version, they then may have to be altered to adjust to changes in the program version. 
 
-2. These analysis files were written on the premise that the FSCV protocols are -0.4V --> 1V --> -0.4V at a 400 V/s scan rate, execucted at 10Hz and the signal being digitized at 100kHz. If any of these parameters are changed during data acquisition, then the following line of code must be altered in the FSCVcal_Aug19.ipf and FSCVstim_Aug19_b.ipf under the function name: 
-"static function CalcOx(oxidation): ButtonControl"
-tc[i]=mean($theWaveName, pnt2x($theWaveName,213), pnt2x($theWaveName,264))
+2. These analysis files were written on the premise that the FSCV protocols are -0.4V --> 1V --> -0.4V at a 400 V/s scan rate, execucted at 10Hz and the signal being digitized at 100kHz. If any of these parameters are changed during data acquisition, then the following line of code must be altered in the FSCVcal_Aug19.ipf and FSCVstim_Aug19_b.ipf under the function name:
+
+  "static function CalcOx(oxidation): ButtonControl"
+
+  tc[i]=mean($theWaveName, pnt2x($theWaveName,213), pnt2x($theWaveName,264))
+
 This line calculates the mean current recorded between 450-650mV of the command voltage. If the recording parameters change (increase
 stimulus range, scan rate or digitization rate) then the values 213&264 must be adjusted so the new values reflect the 450-650mV points on 
 the current waves recorded with the new recording parameter. 
