@@ -23,7 +23,7 @@ fig1:
 
 ![image](https://user-images.githubusercontent.com/52377705/70870266-6301c200-1f91-11ea-9f27-30c4808e50f0.png)
 
-5) go to Panel>Show Info to activate the cursors on the panel (fig2). Place cursors A/B around at the min and max points of the oxidation peak (~450-650mV)
+5) go to Panel>Show Info to activate the cursors on the panel (fig2). Place cursors A/B around at the min and max points of the oxidation peak (~450-650mV). *this will be indicated by the X values (voltage) in the cursor portion of the panel*
 
 fig2:
 
