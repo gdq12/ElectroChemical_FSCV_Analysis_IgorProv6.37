@@ -41,6 +41,7 @@ fig2:
 10) The maximum current produced at oxidation (~600-800mV) must next be calculated. Click on the left bottom panel in the “Calibrator” window so the info panel applies to it and place the A cursor to the left of the peak and the B cursor to the right of the peak (fig1,#5). 
 11) In the black outlined box in the bottom right portion of the “Calibrator Window” enter the numerical DA concentration (in µM) in the boxes right under “Known concentration (uM):” text (fig1,#6). Click on the “Calc Calibration Curve” button right (fig1,#7) above the black outlined box and the calibration curve should appear in the panel right to the left of it. The sensitivity and the calculated error should also appear within the black outlined box
 12) Outside the “Calibrator” window, duplicate voltammogram and calibration curve graphs should appear along with a table of DA concentration vs current amount. These graphs and table can be manipulated as desired for exportation. 
+13) Once finished, "Goodbye" can be clicked (fig1,#8) to close the Calibrator panel
 
   
 
