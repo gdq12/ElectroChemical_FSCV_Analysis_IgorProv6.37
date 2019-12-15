@@ -4,10 +4,8 @@
 2) Install the “patcher’s power tool” macro to import that data from the .dat file created by patchmaster during recordings.  
    (http://www3.mpibpc.mpg.de/groups/neher/index.php?page=aboutppt)
 3) Add the following in house written procedure files into the “Igor Procedures” folder of your Igor Pro application folder: 
-
-    -FSCVcal_Dec19.ipf
-    
-    -FSCVcleaner_Dec19.ipf
+   - FSCVcal_Dec19.ipf
+   - FSCVcleaner_Dec19.ipf
     
 4) Quick note: in house written procedure files written with IGOR pro v6.37, therefore any other IGOR pro version used may require code adjustments
 
@@ -22,11 +20,13 @@
 4) A window named “Calibrator” should appear (fig1) with the top left graph with a single voltammogram graphed onto it (fig,#1)
 
 fig1: 
+
 ![image](https://user-images.githubusercontent.com/52377705/70870266-6301c200-1f91-11ea-9f27-30c4808e50f0.png)
 
 5) go to Panel>Show Info to activate the cursors on the panel (fig2). Place cursors A/B around at the min and max points of the oxidation peak (~450-650mV)
 
 fig2:
+
 ![image](https://user-images.githubusercontent.com/52377705/70869970-719aaa00-1f8e-11ea-94c6-5758297289e2.png)
 
 6) Next the current time course must be visualized for specific wave selection for consecutive steps. Click on “Get Timecourse” button (fig1,#2), which calculates the average current of the values between A/B curser in the previous graph (fig1,#1) for every current wave in the "Calibration" folder. A timecourse wave with DA oxidation for the calibration time period will appear. 
