@@ -59,7 +59,7 @@ static function draw()
 	RenameWindow #,OxDef
 	SetActiveSubwindow ##
 	AppendtoGraph /W=Calibrator#OxDef /L=VertCrossing/B=HorizCrossing Curr10 vs CommVolt
-	Label /W=Calibrator#OxDef  VertCrossing   "Current (nA)"
+	Label /W=Calibrator#OxDef  VertCrossing   "Current (µA)"
 	Label /W=Calibrator#OxDef HorizCrossing "Voltage (V)"
 	Display/W=(286,29,1185,337)/HOST=# 
 	RenameWindow #,Timecourse
