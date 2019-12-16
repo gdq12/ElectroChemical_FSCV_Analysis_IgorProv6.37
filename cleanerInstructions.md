@@ -21,7 +21,12 @@ This method overcomes recording in realtime issue, but it makes analysis more di
 # Brief overview of FSCVcleaner_Dec10.ipf
 
 General outline of what code does 
-- 
+- deletes all but 1 voltage pulse waveand renames it "CommVolt"
+- deletes selected current pulse waves
+- redimensions CommVolt to a single voltage pulse (700 point wave)
+- extracts each current pulse from each wave, renames them "Curr#" odd and even 
+
+
 
 
 
