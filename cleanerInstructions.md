@@ -9,11 +9,19 @@ Since patchmaster can only execute protocols at a maximum of 5Hz in real time, I
 fig1
 ![image](https://user-images.githubusercontent.com/52377705/70886590-155e7700-1fdc-11ea-8207-1878cb2e6a86.png)
 
-**protocol specifics:**
-voltage pulse: -0.4V --> 1V --> -0.4V
-Frequency: 5Hz (in reality 10Hz after redimensioning)
-digitized at 100kHz
-time length: 200ms
+**protocol specifics:** voltage pulse: -0.4V --> 1V --> -0.4V, Frequency: 5Hz (in reality 10Hz after redimensioning), digitized at 100kHz, time length: 200ms
+
+fig2
+![image](https://user-images.githubusercontent.com/52377705/70886929-fa403700-1fdc-11ea-9d85-ce0d7e6004c2.png)
+
+*resulting current pulses*
+
+This method overcomes recording in realtime issue, but it makes analysis more difficult. The FSCVcleaner_Dec19.ipf file was there for created to overcome this issue. 
+
+# Brief overview of FSCVcleaner_Dec10.ipf
+
+General outline of what code does 
+- 
 
 
 
