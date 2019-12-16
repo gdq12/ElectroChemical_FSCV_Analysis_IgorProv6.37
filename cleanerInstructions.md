@@ -1,10 +1,10 @@
-# Background: Voltammetry recording from Patchmaster(HEKA)
+# Background: Voltammetry recording with Patchmaster(HEKA)
 
-When Patchmaster is programmed to execute voltage pulses greater than 5Hz (1x per 200ms), the program experiences massive time delays in visualizing the resulting current pulses, due to how the data is being saved in real time. The time line of the oxidation peak for each current pulse must visualized in real time and typically voltage pulses should be executed at 8-10Hz, patchmaster .pgf files must be programmed slightly different to over come this time delay and maintain the desired pulsating frequency of the protocol. Here I attempt to provide a sufficient and clear explanation on how I circumvented this issue and the protocol I used to maintain analysis efficiency. 
+When Patchmaster is programmed to execute voltage pulses greater than 5Hz (1x per 200ms), the program experiences massive time delays in visualizing the resulting current pulses, due to how the data is being saved in real time. The time line of the oxidation peak for each current pulse must be visualized in real time and typically voltage pulses should be executed at 8-10Hz. Therefore, patchmaster .pgf files must be programmed slightly different to over come this time delay and maintain the desired pulsating frequency of the protocol. Here I attempt to provide a sufficient and clear explanation on how I circumvented this issue and the protocol I used to maintain analysis efficiency. 
 
 # Protocol for 10Hz voltage execution in Patchmaster
 
-Since patchmaster can only execute protocols at a maximum of 5Hz in real time, I programmed patchmaster to execute 200ms voltage pulses which includes 2 triangle voltammetry pulses (-0.4V --> 1V --> -0.4V) 93ms apart within each 200ms pulse (fig1). With this protocol, patchmaster recorded current pulses in the same fashion (fig2)
+Since patchmaster can only execute protocols at a maximum of 5Hz in real time, I programmed patchmaster to execute 200ms voltage pulses which includes 2 triangle 7ms voltammetry pulses (-0.4V --> 1V --> -0.4V) 93ms apart within each 200ms pulse (fig1). With this protocol, patchmaster recorded current pulses in the same fashion (fig2)
 
 fig1
 
@@ -28,7 +28,7 @@ General outline of what code does
 - redimensions remaining voltage wave and current waves 
 
 Outline on using FSCVcleaner_Dec19.ipf:
-1) Copy the .ipf folder into Igor_procedures folder either prior to initializing the program or load the procedure file after starting the program 
+1) Copy the .ipf folder into Igor_procedures folder either prior to initializing Igor Pro or load the procedure file after starting the program 
 2) Once in the desired folder and have uploaded that data into Igor pro, go to FSCV>Cleanup Data
 3) A panel named "Data Cleaner" should appear (fig3)
 
@@ -44,4 +44,4 @@ fig3
 
 Some notes:
 - this procedure file was built to clean up data with the specificities indicated in fig1. (each pulse being 700 points long)
-- should this precedure fle be used for data not acquired with the same protocol (e.g. extended command pulse, different digitization rate, different scan rate), then the code should be altered to adapt to the change 
+- should this precedure file be used for data not acquired with the same protocol (e.g. extended command pulse, different digitization rate, different scan rate), then the code should be altered to adapt to the change. 
