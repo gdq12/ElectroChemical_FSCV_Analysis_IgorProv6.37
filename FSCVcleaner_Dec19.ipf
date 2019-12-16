@@ -68,7 +68,7 @@ end
 
 static function Redim10Hz(waves): ButtonControl
 	string waves
-	Redimension /N=700 root:calibration:CommVolt
+	Redimension /N=700 CommVolt
 	string theWaveList=WaveList("*CurrentIn",  ";", "DIMS:1")
 	variable i=0
 	string oddList= ""
