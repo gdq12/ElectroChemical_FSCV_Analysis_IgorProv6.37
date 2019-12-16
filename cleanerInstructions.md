@@ -7,11 +7,13 @@ When Patchmaster is programmed to execute voltage pulses greater than 5Hz (1x pe
 Since patchmaster can only execute protocols at a maximum of 5Hz in real time, I programmed patchmaster to execute 200ms voltage pulses which includes 2 triangle voltammetry pulses (-0.4V --> 1V --> -0.4V) 93ms apart within each 200ms pulse (fig1). With this protocol, patchmaster recorded current pulses in the same fashion (fig2)
 
 fig1
+
 ![image](https://user-images.githubusercontent.com/52377705/70886590-155e7700-1fdc-11ea-8207-1878cb2e6a86.png)
 
 **protocol specifics:** voltage pulse: -0.4V --> 1V --> -0.4V, Frequency: 5Hz (in reality 10Hz after redimensioning), digitized at 100kHz, time length: 200ms
 
 fig2
+
 ![image](https://user-images.githubusercontent.com/52377705/70886929-fa403700-1fdc-11ea-9d85-ce0d7e6004c2.png)
 
 *resulting current pulses*
@@ -31,12 +33,15 @@ Outline on using FSCVcleaner_Dec19.ipf:
 3) A panel named "Data Cleaner" should appear (fig3)
 
 fig3
+
 ![image](https://user-images.githubusercontent.com/52377705/70895450-45fbdc00-1fef-11ea-854d-e0f36fd430de.png)
 
+4) click on "Organize V-waves". This will delete all but one voltage wave and rename it "CommVolt"
+5) The next step is to remove any excessive or "junk" current wave pulses that were unecessarily recorded to keep the current signal stable during recording. Once you have in mind the set of waves that not needed for analysis, input the first and last wave number into the numerical boxes next to "first pulse:" and "last pulse:", respectively. This should delete all the current pulses that you indicated. 
+6) Finally, since there are 2 current/voltage pulses with each wave, these pulses must be extracted into new individual waves and labelled as even and odd "Curr#" appropriately. Click "Redimension current waves" to do this. 
+7) Once this process is complete, one can examine the waves to verify that they are in the right dimension, they contain one pulse and they are labelled correctly. 
+8) Click on "Goodbye!" to close the window and continue with the normal calibration analysis. 
 
-
-
-
-Because of patchmaster's software limitations, patchmaster had to be programmed to stimulate a command voltage twice in 1 sweep at 93ms apart so the command voltage could be sent at 10Hz in real time. To be able to analyze every pulse individually, the "redimension" command in the procedure files re-adjusts the current sweep so that the first pulse is labelled as an odd number wave while the second pulse is labelled as an even numbered wave. The command accounts for numerical sequential ordering of the wave names for consecutive analysis functions. 
-
-For assuring background current stability and due to patchmaster software design, .dat files created during data acquisition are unnecessarily large and essentially have a lot of "junk" voltage and current sweeps. The FSCVcleaner_Aug19.ipf was created as a speedy way to delete the unnecessary voltage and current waves. So the analyzer should know which current sweep number to delete prior to using this. 
+Some notes:
+- this procedure file was built to clean up data with the specificities indicated in fig1. (each pulse being 700 points long)
+- should this precedure fle be used for data not acquired with the same protocol (e.g. extended command pulse, different digitization rate, different scan rate), then the code should be altered to adapt to the change 
