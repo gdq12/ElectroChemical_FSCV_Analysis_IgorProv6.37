@@ -8,7 +8,9 @@ Quick Notes
 
 1. These procedure files were written in IGOR pro v6.37 environment. Should they be used in any other version, they then may have to be altered to adjust to changes in the program version. 
 
-2. Calibration technique these codes are based is "accumulative pippetting" of Dopamine (DA) concentrations. For example, after 1 minute minimum of baseline 0.5µM DA was added to the aCSF bath where the carbon fiber electrode was recorded from 4x at 1-minute intervals. This results in 0.5/1/1.5/2µM DA concentrations for calibration. The setup of this code may not be best suited for perfusion method of DA calibration, but snippets of the code can be adjusted to get equal results.  
+2. These procedure files were originally written in macbook pro early 2011 High Sierra, and build GUIs that are formatted based on the scrren configurations of this system. If these procedure files are used in another pc system, the GUI dimensions will most probably be different but this should not affect the data in anyway. It will probably just scew how its visualized. 
 
-3. Due to specific pathchmaster program limitations, FSCVcleaner_Dec19.ipf was written to cleanup the data and increase analysis efficieny. More details described in FSCVcleaner markdown file.  
+3. Calibration technique these codes are based is "accumulative pippetting" of Dopamine (DA) concentrations. For example, after 1 minute minimum of baseline 0.5µM DA was added to the aCSF bath where the carbon fiber electrode was recorded from 4x at 1-minute intervals. This results in 0.5/1/1.5/2µM DA concentrations for calibration. The setup of this code may not be best suited for perfusion method of DA calibration, but snippets of the code can be adjusted to get equal results.  
+
+4. Due to specific pathchmaster program limitations, FSCVcleaner_Dec19.ipf was written to cleanup the data and increase analysis efficieny. More details described in FSCVcleaner markdown file.  
 
