@@ -4,9 +4,16 @@ When Patchmaster is programmed to execute voltage pulses greater than 5Hz (1x pe
 
 # Protocol for 10Hz voltage execution in Patchmaster
 
-Since patchmaster can only execute protocols at a maximum of 5Hz in real time, I programmed patchmaster to execute 200ms voltage pulses which includes 2 triangle voltammetry pulses (-0.4V --> 1V --> -0.4V) 93ms apart within each 200ms pulse (fig1). 
+Since patchmaster can only execute protocols at a maximum of 5Hz in real time, I programmed patchmaster to execute 200ms voltage pulses which includes 2 triangle voltammetry pulses (-0.4V --> 1V --> -0.4V) 93ms apart within each 200ms pulse (fig1). With this protocol, patchmaster recorded current pulses in the same fashion (fig2)
 
 fig1
+![image](https://user-images.githubusercontent.com/52377705/70886590-155e7700-1fdc-11ea-8207-1878cb2e6a86.png)
+
+**protocol specifics:**
+voltage pulse: -0.4V --> 1V --> -0.4V
+Frequency: 5Hz (in reality 10Hz after redimensioning)
+digitized at 100kHz
+time length: 200ms
 
 
 
