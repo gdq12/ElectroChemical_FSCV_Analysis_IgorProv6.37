@@ -21,10 +21,17 @@ This method overcomes recording in realtime issue, but it makes analysis more di
 # Brief overview of FSCVcleaner_Dec10.ipf
 
 General outline of what code does 
-- deletes all but 1 voltage pulse waveand renames it "CommVolt"
-- deletes selected current pulse waves
-- redimensions CommVolt to a single voltage pulse (700 point wave)
-- extracts each current pulse from each wave, renames them "Curr#" odd and even 
+- Cleans up excess voltage pulse waves
+- deletes unucessary current pulses 
+- redimensions remaining voltage wave and current waves 
+
+Outline on using FSCVcleaner_Dec19.ipf:
+1) Copy the .ipf folder into Igor_procedures folder either prior to initializing the program or load the procedure file after starting the program 
+2) Once in the desired folder and have uploaded that data into Igor pro, go to FSCV>Cleanup Data
+3) A panel named "Data Cleaner" should appear (fig3)
+
+fig3
+![image](https://user-images.githubusercontent.com/52377705/70895450-45fbdc00-1fef-11ea-854d-e0f36fd430de.png)
 
 
 
