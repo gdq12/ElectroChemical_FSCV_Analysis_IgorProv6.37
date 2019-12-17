@@ -2,19 +2,10 @@
 #include <Waves Average>
 
 Menu "FSCV"
-	"New Calibration Folder", FSCVcal#NewFolder()
 	"Electrode Calibration", FSCVcal#call()
 end 	
 
-//after creating the Calibration subfolder, make sure red arrow in data browser is set to this folder 
-//load all files using LoadPM to this subfolder 
-//can cleanup the folder by deleting all but 1 voltageIn wave
-//using Macros --> PPT Macros --> rename multiple wave, rename all current waves with format "Cal_#" (neccessary for following codes)
-
-static function NewFolder()
-	NewDataFolder /O root:Calibration
-end 	
-
+//build GUI call(), draw() and init()
 static function call()
 	DoWindow Calibrator
 	if(V_Flag)
@@ -59,7 +50,8 @@ static function draw()
 	RenameWindow #,OxDef
 	SetActiveSubwindow ##
 	AppendtoGraph /W=Calibrator#OxDef /L=VertCrossing/B=HorizCrossing Curr10 vs CommVolt
-	Label /W=Calibrator#OxDef  VertCrossing   "Current (µA)"
+		//10th current randomly chosen for cursor orientation, no specific significance 
+	Label /W=Calibrator#OxDef  VertCrossing   "Current (nA)"
 	Label /W=Calibrator#OxDef HorizCrossing "Voltage (V)"
 	Display/W=(286,29,1185,337)/HOST=# 
 	RenameWindow #,Timecourse
@@ -78,74 +70,64 @@ static function init()
 	Button ClearGraphBut, proc=FSCVcal#ClearVoltGraph, win=Calibrator
 	Button SlopeCalcBut, proc=FSCVcal#Calibration, win=Calibrator
 	Button ExitBut, proc=FSCVcal#Bye, win=Calibrator
-	Variable /G root:Calibration:con1da=1
-	Variable /G root:Calibration:con2da=1
-	Variable /G root:Calibration:con3da=1
-	Variable /G root:Calibration:con4da=1
+	Variable /G con1da=1
+	Variable /G con2da=1
+	Variable /G con3da=1
+	Variable /G con4da=1
 		//must make results of SetVariables into global variables so can be used by Calibration function 
-	SetVariable con1Var, win=Calibrator, value=root:Calibration:con1da
-	SetVariable con2Var, win=Calibrator, value=root:Calibration:con2da
-	SetVariable con3Var, win=Calibrator, value=root:Calibration:con3da
-	SetVariable con4Var, win=Calibrator, value=root:Calibration:con4da
+	SetVariable con1Var, win=Calibrator, value=con1da
+	SetVariable con2Var, win=Calibrator, value=con2da
+	SetVariable con3Var, win=Calibrator, value=con3da
+	SetVariable con4Var, win=Calibrator, value=con4da
 end 
 
 
 static function CalcOx(oxidation): ButtonControl
-	string oxidation //need for the button effect, not play a role in this function 
+	string oxidation 
+//Create string list of all current waves in working directory and arrange names in list in numerical order
 	string theWaveList1=WaveList("Curr*",  ";", "DIMS:1")
-		//to gather all the names of the current waves in folder and place into string 
 	string theWaveList=SortList(theWavelist1, ";", 16)	
-	string theWaveName
-	variable i=0
-		//this is the loop code to follow
-	variable q=ItemsInList(theWaveList, ";")
-		//this counts the number of current waves that are in the folder and sets this value for "q"
-	
+//create timecourse template wave
 	make /D /O /N=(ItemsInList(theWaveList, ";")) Timec
 	wave tc=Timec
-		//this commences to create the wave that will be used to plot the time course making it as long as the number of current waves in the folder 
-	
+//set min and max current value of DA oxidation from background voltammogram 
 	variable a=pcsr(A, "Calibrator#OxDef")
 	variable b=pcsr(B, "Calibrator#OxDef")
-		//min and max current points in each background current will be used for mean current timecourse graph
-	
+//calculate the mean current (from cursors) of each current wave, save the calculated mean, and insert value into timecourse wave 
+	string theWaveName
+	variable i=0
+	variable q=ItemsInList(theWaveList, ";")
+		//set the number of repeats in for loop
 	for(i=0; i<q; i+=1)
 		theWaveName=GetStrFromList(theWaveList, i, ";")
 		tc[i]=mean($theWaveName, pnt2x($theWaveName,a), pnt2x($theWaveName,b))
 	endfor 
-		//this loop extracts the name of the current wave from the string list, calculates the mean current between the specified points, 
-		//then places the value in a cell in the "Timecourse" wave that was just created 
-		//the values are placed into cells of this "wave" in sequential order because the forloop defined the min and max points by "i" and "q"
-		//which then also determines the point number of the timecourse wave via "[i]"	
-	
+//graph new timecourse wave in specific GUI graph	
 	AppendToGraph /W=Calibrator#Timecourse tc
-		//to graph the new timecourse wave to the specific window in the GUI, path of place of window must be specified in /W=
 	Label /W=Calibrator#Timecourse left "Current (A)"
 	Label /W=Calibrator#Timecourse bottom "Sweep Count"
 end 	
 
 static function Voltammograms(voltgraphs): ButtonControl
-	string voltgraphs //for button function, no significant value in this function 
+	string voltgraphs
+//Create string list of all current waves in working directory and arrange names in list in numerical order
 	string theWaveList1=WaveList("Curr*",  ";", "DIMS:1")
 	string theWaveList=SortList(theWavelist1, ";", 16)	
-//for baseline wave
+//create baseline wave for background subtracted DA current waves
 	string theWaveNamebase
-	string baseLineList= "" //no space between the quotation marks or else wont be properly recognized as list wave in fWaveAverage function 
+	string baseLineList= ""  
 	variable q=0
 	variable a=pcsr(A, "Calibrator#Timecourse")
-	variable b=pcsr(B, "Calibrator#Timecourse")+1 //wrote like this because when examined list string, the desired waves were recalled 
-		//variables a and b set to cursor position so the for loop can recall the wave names from start to finish based in the cursor position in the timecourse wave
-		//predict for cursor function dont need a ocal reference of Timecourse wave 
+	variable b=pcsr(B, "Calibrator#Timecourse")+1 
+		//set first and last wave for wave average calculation based on timecourse wave
 	for(q=a; q<b; q+=1)
 		theWaveNamebase=StringFromList(q, theWaveList)	
 		baseLineList=AddListItem(theWaveNamebase, baseLineList, "; ")
 	endfor
-		//the for loop forms the list string backwards, so wave from last cursor first and wave from first cursor last 
-		//this backward sequential organization of wave names doesnt effect diffwave results 
+		//creates string list of baseline current waves names 
 	fWaveAverage(baseLineList, "", 0, 0, "baseline", "") 
-		//"if" issues with fWaveAverage in compilation --> deactivate in procedure file first via // then compile wave average.ipf (search for it) 
-		//fWaveAverage is a wave metrics function and can search for its helpfile and procedure file for more details on its functionality 
-//for first DA concentration wave 
+		//save average baseline current wave as baseline
+//first DA concentration average wave 
 	string theWaveNameDA1
 	string DA1LineList= ""
 	variable c=pcsr(C, "Calibrator#Timecourse")
@@ -155,7 +137,8 @@ static function Voltammograms(voltgraphs): ButtonControl
 		DA1LineList=AddListItem(theWaveNameDA1, DA1LineList, "; ")
 	endfor
 	fWaveAverage(DA1LineList, "", 0, 0, "DA1", "") 
-//for second DA concentration wave 
+		//save average DA current wave as DA1
+//for second DA concentration average wave 
 	string theWaveNameDA2
 	string DA2LineList= ""
 	variable e=pcsr(E, "Calibrator#Timecourse")
@@ -165,6 +148,7 @@ static function Voltammograms(voltgraphs): ButtonControl
 		DA2LineList=AddListItem(theWaveNameDA2, DA2LineList, "; ")
 	endfor
 	fWaveAverage(DA2LineList, "", 0, 0, "DA2", "") 
+		//save average DA current wave as DA2
 //for third DA concentration wave
 	string theWaveNameDA3
 	string DA3LineList= ""
@@ -175,6 +159,7 @@ static function Voltammograms(voltgraphs): ButtonControl
 		DA3LineList=AddListItem(theWaveNameDA3, DA3LineList, "; ")
 	endfor
 	fWaveAverage(DA3LineList, "", 0, 0, "DA3", "") 
+		//save average DA current wave as DA3
 //for fourth DA concetration wave
 	string theWaveNameDA4
 	string DA4LineList= ""
@@ -185,30 +170,28 @@ static function Voltammograms(voltgraphs): ButtonControl
 		DA4LineList=AddListItem(theWaveNameDA4, DA4LineList, "; ")
 	endfor
 	fWaveAverage(DA4LineList, "", 0, 0, "DA4", "") 
-//to calculate voltammograms 
+	//save average DA current wave as DA4
+//to create background subtracted DA current waves 
+	//create template waves for subtraction
 	Duplicate /O /S baseline 'diff1'
 	Duplicate /O /S baseline 'diff2'
 	Duplicate /O /S baseline 'diff3'
 	Duplicate /O /S baseline 'diff4'
-	wave baseline=baseline
 	wave DA1=DA1
 	wave DA2=DA2
 	wave DA3=DA3
 	wave DA4=DA4	
-	wave base=baseline
-	diff1=DA1-base
-	diff2=DA2-base
-	diff3=DA3-base
-	diff4=DA4-base
-		//makes the actual difference wave
-		//cant use MatrixOP because then if not use all cursors the code will malfunction and not work, will have to manually silence particular lines each time 
-	
+	wave baseline=baseline
+	diff1=DA1-baseline
+	diff2=DA2-baseline
+	diff3=DA3-baseline
+	diff4=DA4-baseline
+//Graph background subtracted DA waves against CommVolt			
 	AppendtoGraph /W=Calibrator#Voltammogram /L=VertCrossing/B=HorizCrossing diff1,diff2,diff3,diff4 vs CommVolt
 	ModifyGraph /W=Calibrator#Voltammogram rgb(diff1)=(0,0,0),rgb(diff3)=(0,0,65535),rgb(diff4)=(0,65535,0)
-		//adds the waves to the correct subwindow in GUI
 	Label /W=Calibrator#Voltammogram  VertCrossing   "Current (nA)"
 	Label /W=Calibrator#Voltammogram HorizCrossing "Voltage (V)"
-//produce voltammogram graph outside of GUI for exporting 
+	//produce voltammogram graph outside of GUI for exporting 
 	Display /L=VertCrossing/B=HorizCrossing diff1,diff2,diff3,diff4 vs CommVolt	
 	ModifyGraph rgb(diff1)=(0,0,0),rgb(diff3)=(0,0,65535),rgb(diff4)=(0,65535,0)
 	Label  VertCrossing   "Current (nA)"
@@ -216,16 +199,17 @@ static function Voltammograms(voltgraphs): ButtonControl
 
 end 
 
+//for if want to recalculate background subtracted DA current waves and want to regraph new voltammograms
 static function ClearVoltGraph(clear): ButtonControl
 	string clear 
-	RemoveFromGraph /W=Calibrator#Voltammogram diff1,diff2,diff3,diff4
-		//this is if want to recalculate the diffwaves, then must remove the waves already made so no conflict in cursor function in the calibration function 
+	RemoveFromGraph /W=Calibrator#Voltammogram diff1,diff2,diff3,diff4		
 end 
 
 static function Calibration(calculator): ButtonControl
-	string calculator //not meaningful in this function, just for button functionality 
-//calculate peaks for yvalues 
+	string calculator 
+//calculate height of oxidation peak for each background subtracted DA wave
 	make /O  /N=4 CurrentValue
+		//create template wave so can save calculated peak heights that will be calculated by WaveStats 
 	wave cw=CurrentValue
 	WaveStats/Q /C=12 /R=[pcsr(A, "Calibrator#Voltammogram"),pcsr(B,"Calibrator#Voltammogram")] diff1
 	cw[0]=V_Max //V_Max extracted before its is over written by the execution of WaveStats function 
@@ -235,23 +219,23 @@ static function Calibration(calculator): ButtonControl
 	cw[2]=V_Max
 	WaveStats/Q /C=12 /R=[pcsr(A, "Calibrator#Voltammogram"),pcsr(B,"Calibrator#Voltammogram")] diff4
 	cw[3]=V_Max
-//input DAuM for xvalues 
-	NVAR con1da=root:Calibration:con1da
-	NVAR con2da=root:Calibration:con2da
-	NVAR con3da=root:Calibration:con3da
-	NVAR con4da=root:Calibration:con4da
+//create DA concentration wave
+	NVAR con1da=con1da
+	NVAR con2da=con2da
+	NVAR con3da=con3da
+	NVAR con4da=con4da
 	make /O  /N=4 DAuMvalue
 	wave da=DAuMvalue
 	da[0]=con1da
 	da[1]=con2da
 	da[2]=con3da
 	da[3]=con4da
-//Graph nA peaks vs uM DA
+//Graph DA oxidation peaks values vs DA concentration
 	AppendtoGraph/W=Calibrator#CalibrationCalc CurrentValue vs DAuMvalue
 	ModifyGraph /W=Calibrator#CalibrationCalc mode=2,lsize=5
 	Label /W=Calibrator#CalibrationCalc left "Current (nA)"
 	Label /W=Calibrator#CalibrationCalc bottom "DA concentration (uM)"
-//produce graph outside of GUI for exportation 
+	//produce graph outside of GUI for exportation 
 	Display CurrentValue vs DAuMvalue
 	ModifyGraph mode=2,lsize=5
 	Label left "Current (nA)"
@@ -271,19 +255,26 @@ static function Calibration(calculator): ButtonControl
 	printf "Sensitivity: %s nA/uM\r", SensSlope
 		//so can be printed into the notebook for copy and paste to other files like word or excel
 	Edit DAuMValue, CurrentValue	
-//Calculates SEM
+//Calculates SEM(error)
 	variable SD=sqrt(variance(cw))
 	variable SEM=(SD/sqrt(numpnts(cw)))*10^9 
 	string Error=num2str(SEM) 
 	TitleBox SEMcalc, win=Calibrator, title=Error, fcolor=(0,0,0)
 	print "Error: ", Error
+		//to print out value into notebook for copy/paste into external programs 
 end 	
 
+//to exit out of GUI when finish with analysis
 static function Bye(exit): ButtonControl
-	string exit //for button functionality 
+	string exit 
 	DoWindow /K Calibrator
-		//to close out of GUI with ease since x on panel was disabled by /K=2 in draw function 
+		
 end 	
+	
+
+
+
+
 	
 
 
