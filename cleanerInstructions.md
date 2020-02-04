@@ -10,7 +10,7 @@ fig1
 
 ![image](https://user-images.githubusercontent.com/52377705/70886590-155e7700-1fdc-11ea-8207-1878cb2e6a86.png)
 
-**protocol specifics:** voltage pulse: -0.4V --> 1V --> -0.4V, Frequency: 5Hz (in reality 10Hz after redimensioning), digitized at 100kHz, time length: 200ms
+**protocol specifics:** voltage pulse: -0.4V --> 1V --> -0.4V, scan rate: 400 V/s, Frequency: 5Hz (in reality 10Hz after redimensioning), digitized at 100kHz, time length: 200ms
 
 fig2
 
@@ -44,4 +44,4 @@ fig3
 
 Some notes:
 - this procedure file was built to clean up data with the specificities indicated in fig1. (each pulse being 700 points long)
-- should this precedure file be used for data not acquired with the same protocol (e.g. extended command pulse, different digitization rate, different scan rate), then the code should be altered to adapt to the change. 
+- should this procedure file be used for data not acquired with the same protocol (e.g. extended command pulse, different digitization rate, different scan rate), then the code should be altered to adapt to the change. 
