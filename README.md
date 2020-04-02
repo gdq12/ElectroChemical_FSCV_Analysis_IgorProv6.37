@@ -10,7 +10,7 @@ Quick Notes
 
 2. These procedure files were originally written in 13" macbook pro early 2011 High Sierra, and build GUIs that are formatted based on the screen configurations of this system. If these procedure files are used in another pc system, the GUI dimensions will most probably be different but this should not affect the data in anyway. It will probably just skew how its visualized. 
 
-3. Calibration technique that these codes are based is "accumulative pippetting" of Dopamine (DA) concentrations. For example, after 1 minute of background current recorded, 0.5µM DA is added to the aCSF bath from which the carbon fiber electrode was recording from 4x at 1-minute intervals. This results in 0.5/1/1.5/2µM DA concentrations for calibration. The setup of this code may not be best suited for perfusion method of DA calibration, but snippets of the code can be adjusted to get equal results.  
+3. Calibration technique that these codes are based on "accumulative pippetting" of Dopamine (DA) concentrations. For example, after 1 minute of background current recorded, 0.5µM DA is added to the aCSF bath from which the carbon fiber electrode was recording from and then another 3x at 1-minute intervals. This results in 0.5/1/1.5/2µM DA concentrations for calibration. The setup of this code may not be best suited for perfusion method of DA calibration, but snippets of the code can be adjusted to get equal results.  
 
 4. Due to specific pathchmaster program limitations, FSCVcleaner_Dec19.ipf was written to cleanup the data and increase analysis efficieny. More details described in cleaner markdown file.  
 
