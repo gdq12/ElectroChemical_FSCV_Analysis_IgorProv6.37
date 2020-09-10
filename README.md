@@ -10,13 +10,13 @@ When Patchmaster is programmed to execute voltage pulses greater than 5Hz (1x pe
 
 ### 10Hz FSCV protocol with Patchmaster
 
-Since patchmaster can only execute protocols at a maximum of 5Hz in real time, patchmaster is programmed to execute 200ms voltage pulses which includes 2 triangle 7ms voltammetry pulses (-0.4V $\rightarrow$ 1V $\rightarrow$ -0.4V) 93ms apart within each 200ms pulse (fig1). With this protocol, patchmaster recorded current pulses in the same fashion (fig2).
+Since patchmaster can only execute protocols at a maximum of 5Hz in real time, patchmaster is programmed to execute 200ms voltage pulses which includes 2 triangle 7ms voltammetry pulses (-0.4V --> 1V --> -0.4V) 93ms apart within each 200ms pulse (fig1). With this protocol, patchmaster recorded current pulses in the same fashion (fig2).
 
 fig1:
 
 ![voltagePulse](images/voltagePulse.png)
 
-**protocol specifics:** voltage pulse: -0.4V $\rightarrow$ 1V $\rightarrow$ -0.4V, scan rate: 400 V/s, Frequency: 5Hz (in reality 10Hz after redimensioning), digitized at 100kHz, time length: 200ms
+**protocol specifics:** voltage pulse: -0.4V --> 1V --> -0.4V, scan rate: 400 V/s, Frequency: 5Hz (in reality 10Hz after redimensioning), digitized at 100kHz, time length: 200ms
 
 fig2: (**resulting current pulses**)
 
@@ -48,8 +48,7 @@ this procedure file was built to clean up data with the specificities indicated 
 
 ### Preinstallation requirements
 
-- [Patcher's power tool](http://www3.mpibpc.mpg.de/groups/neher/index.php?page=aboutppt)
-) if using data recorded from patchmaster, if not will have to look into another macro to use to import data into IGOR pro
+- [Patcher's power tool](http://www3.mpibpc.mpg.de/groups/neher/index.php?page=aboutppt) if using data recorded from patchmaster, if not will have to look into another macro to use to import data into IGOR pro
 - IGOR pro v6.37 installed on working computer
 
 ### Data format requirements
@@ -84,7 +83,7 @@ fig5:
    - I/J=4th DA concentration
 8) Once the cursors are placed in the desired sections of the timecourse graph, click on the “Calc Voltammograms” button (fig4.4). This will calculate the average current pulse for each concentration, create background subtracted pulses and graph each one against the command voltage, which will then be visualized in the bottom left graph.
 9) The maximum current produced at oxidation (~600-800mV) must next be calculated. Click on the left bottom graph in the “Calibrator” window so the info panel applies to it (yellow outline) and place the A cursor to the left of the peak and the B cursor to the right of the peak (fig4.5).
-10) In the black outlined box in the bottom right portion of the “Calibrator Window” enter the numerical DA concentration (in µM) in the boxes right under “Known concentration ($\muM$):” text (fig4.6). Click on the “Calc Calibration Curve” button right (fig4.7) above the black outlined box and the calibration curve should appear in the panel right to the left of it. The sensitivity and the calculated error should also appear within the black outlined box
+10) In the black outlined box in the bottom right portion of the “Calibrator Window” enter the numerical DA concentration (in µM) in the boxes right under “Known concentration (µM):” text (fig4.6). Click on the “Calc Calibration Curve” button right (fig4.7) above the black outlined box and the calibration curve should appear in the panel right to the left of it. The sensitivity and the calculated error should also appear within the black outlined box
 11) Outside the “Calibrator” window, duplicate voltammogram and calibration curve graphs should appear along with a table of DA concentration vs current amount. These graphs and table can be manipulated as desired for exportation.
 12) Once finished, "Goodbye" can be clicked (fig4.8) to close the Calibrator panel
 
@@ -94,4 +93,4 @@ fig5:
 
 2. These procedure files were originally written in 13" macbook pro early 2011 High Sierra, and build GUIs that are formatted based on the screen configurations of this system. If these procedure files are used in another pc system, the GUI dimensions will most probably be different but this should not affect the data in anyway. It will probably just skew how its visualized.
 
-3. Calibration technique that these codes are based on "accumulative pippetting" of Dopamine (DA) concentrations. For example, after 1 minute of background current recorded, $0.5\muM$ DA is added to the aCSF bath from which the carbon fiber electrode was recording from and then another 3x at 1-minute intervals. This results in 0.5/1/1.5/2 $\muM$ DA concentrations for calibration. The setup of this code may not be best suited for perfusion method of DA calibration, but snippets of the code can be adjusted to get equal results.  
+3. Calibration technique that these codes are based on "accumulative pippetting" of Dopamine (DA) concentrations. For example, after 1 minute of background current recorded, 0.5µM DA is added to the aCSF bath from which the carbon fiber electrode was recording from and then another 3x at 1-minute intervals. This results in 0.5/1/1.5/2µM DA concentrations for calibration. The setup of this code may not be best suited for perfusion method of DA calibration, but snippets of the code can be adjusted to get equal results.  
