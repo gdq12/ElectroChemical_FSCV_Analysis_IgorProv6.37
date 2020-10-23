@@ -39,6 +39,9 @@ fig3:
 6) Finally, since there are 2 current/voltage pulses with each wave, these pulses must be extracted into new individual waves and labelled as even and odd "Curr#" appropriately. Click "Redimension current waves" to do this.
 7) Once this process is complete, one can examine the waves to verify that they are in the right dimension, they contain one pulse and they are labelled correctly.
 8) Click on "Goodbye!" to close the window and continue with the normal calibration analysis.
+9) Once all this is complete, waves should be transformed from the shape in fig3 to the shape depicted in the figure below:
+
+![wavePostClean](images/wave_post_clean.png)
 
 **keep in mind:**
 
