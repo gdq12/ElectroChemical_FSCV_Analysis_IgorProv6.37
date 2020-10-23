@@ -41,7 +41,7 @@ fig3:
 8) Click on "Goodbye!" to close the window and continue with the normal calibration analysis.
 9) Once all this is complete, waves should be transformed from the shape in fig3 to the shape depicted in the figure below:
 
-<img src='images/wave_post_clean.png' alt=200 width=200>
+<img src='images/wave_post_clean.png' alt=300 width=300>
 
 **keep in mind:**
 
