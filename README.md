@@ -1,6 +1,6 @@
 ## Overview
 
-This repository consists of custom written procedural files (*.ipf) to clean and calibrate Fast-Scan-Cyclic Voltammetry (FSCV) data recorded from a HEKA EPC8 amplifier with an LIH8+8 digitizer. [Data cleaner script](https://github.com/gdq12/ElectroChemical_FSCV_Analysis_IgorProv6.37/blob/master/data_cleaner.ipf) was created to circumvent a Patchmaster limitation (elaborated below), and the [calibration script](https://github.com/gdq12/ElectroChemical_FSCV_Analysis_IgorProv6.37/blob/master/calibration.ipf) renders the GUI for electrode calibration analysis.
+This repository consists of custom written procedural files (*.ipf) to clean and calibrate Fast-Scan-Cyclic Voltammetry (FSCV) data recorded from a HEKA EPC8 amplifier with an LIH8+8 digitizer. [Data cleaner script](https://github.com/gdq12/ElectroChemical_FSCV_Analysis_IgorProv6.37/blob/master/data_cleaner.ipf) was created to circumvent a Patchmaster limitation (elaborated below), and the [calibration script](https://github.com/gdq12/ElectroChemical_FSCV_Analysis_IgorProv6.37/blob/master/calibration.ipf) renders the GUI for electrode calibration analysis. The protcol used to fabricate electrodes for this analysis can be found [here](electrode_fabrication.md)
 
 ## Data Cleaner
 
